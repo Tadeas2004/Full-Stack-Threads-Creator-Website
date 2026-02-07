@@ -1,0 +1,1661 @@
+/* 1. ROOT VARIABLES & RESET */
+:root {
+    --primary-neon: #FF0033; 
+    --primary-dark: #D9002B;
+    --bg-dark: #000000;
+    --text-white: #ffffff;
+    --text-gray: #a1a1a1;
+    --grid-color: rgba(255, 0, 51, 0.18); 
+    --luxury-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5), 0 18px 36px -18px rgba(0, 0, 0, 0.5);
+    --inner-glow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+    --border-light: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 0, 51, 0.2) 50%, rgba(255, 255, 255, 0.05));
+    --max-width: 1100px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* SEM VLOŽ TENTO KÓD - To je tvůj nový globální kontejner */
+.container {
+    max-width: var(--max-width); /* Použije tvých 1100px */
+    margin: 0 auto;              /* Vycentruje obsah */
+    padding: 0 30px;             /* Odsazení od krajů na mobilu */
+    width: 100%;
+}
+
+html {
+    scroll-behavior: smooth; /* This ensures all # links scroll smoothly */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    overflow-x: hidden;
+    padding-top: 80px; 
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Nastavíme odsazení pro všechny sekce, které mají ID (kotvy) */
+section[id] {
+    /* Výška navbaru je 80px + přidáme 20px rezervu, aby nadpis "dýchal" */
+    scroll-margin-top: 100px;
+}
+
+/* 2. THE NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 3. LOGO */
+/* Target the logo container */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease; /* Subtle interaction effect */
+}
+
+/* Target the image specifically */
+.nav-logo img {
+    height: 45px; /* Adjust this number to make it smaller or bigger */
+    width: auto;  /* Maintains the correct aspect ratio */
+    display: block;
+}
+
+/* Optional: Slight hover effect for a premium feel */
+.nav-logo:hover {
+    transform: scale(1.05);
+}
+
+/* 4. NAV LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-gray);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-neon);
+}
+
+.nav-cta-btn {
+    background: var(--primary-neon);
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: 800 !important;
+}
+
+/* 5. HERO SECTION */
+.hero {
+    position: relative;
+    padding: 60px 20px; /* Balanced padding top and bottom */
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column; /* Stack children vertically if needed */
+    justify-content: center; /* Centers content vertically when direction is column */
+    align-items: center;    /* Centers content horizontally */
+}
+
+.hero-background-effects {
+    position: absolute;
+    inset: 0; 
+    z-index: 0;
+    background: radial-gradient(
+        circle at 50% -16%, 
+        rgba(255, 0, 51, 0.4) 0%, 
+        rgba(255, 0, 51, 0.1) 20%,
+        transparent 40%
+    );
+}
+
+.hero-background-effects::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image:
+    linear-gradient(to bottom, black 0%, transparent 35%),
+    radial-gradient(circle at 50% 15%, black 35%, transparent 80%);
+    -webkit-mask-image:
+    linear-gradient(to bottom, black 0%, transparent 35%),
+    radial-gradient(circle at 50% 15%, black 35%, transparent 80%);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+    opacity: 0.65;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 2;
+    max-width: var(--max-width);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 50px;
+}
+
+/* 6. SOCIAL PROOF & TEXT */
+.social-proof-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.avatar-stack {
+    display: flex;
+    padding-left: 10px;
+}
+
+.avatar {
+    width: 34px; 
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid var(--bg-dark);
+    margin-left: -12px;
+}
+
+.stars-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stars {
+    color: #FFD700;
+    font-size: 0.95rem;
+}
+
+.student-count {
+    color: var(--text-gray);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.textured-h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.8rem, 8.5vw, 5rem);
+    font-weight: 500;
+    line-height: 1; 
+    letter-spacing: -0.04em;
+    color: var(--text-white); 
+    max-width: 950px;
+    margin-bottom: 25px;
+    margin-top: 40px;
+}
+
+.hero-subtitle {
+    text-wrap: balance; 
+    max-width: 55ch; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* 7. ATOMIC BUTTON */
+.btn-atomic {
+    display: inline-block;
+    padding: 18px 45px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-white);
+    background: linear-gradient(90deg, var(--primary-neon), var(--primary-dark));
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-atomic:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(255, 0, 51, 0.6);
+}
+
+.btn-atomic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: 0.7s;
+}
+
+.btn-atomic:hover::before {
+    left: 100%;
+}
+
+/* 8. BUNDLE IMAGE */
+.hero-image-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack image and proof */
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 80px;
+    overflow: visible !important;
+}
+
+.hero-img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    filter: drop-shadow(0 0 50px rgba(255, 0, 51, 0.35)) 
+            drop-shadow(0 0 20px rgba(255, 0, 51, 0.2));
+    transition: transform 0.5s ease-out;
+    /* ... vaše stávající styly ... */
+    transform: translateZ(0); /* Vynutí samostatnou vrstvu na GPU */
+    backface-visibility: hidden; /* Zabrání problikávání při překreslování */
+    will-change: filter, transform;
+}
+
+/* SHARED BASE TESTIMONIAL */
+.testimonial-card {
+    /* Subtle dark grey gradient to stand out on pure black */
+    background: linear-gradient(145deg, rgba(35, 35, 35, 0.7) 0%, rgba(10, 10, 10, 0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* THE PREMIUM "GLASS" REFLECTION */
+.testimonial-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+/* FEATURED CARD (Matyas" Fix) */
+.testimonial-featured {
+    /* 1. Use percentage for width so it shrinks on mobile */
+    width: 92%; 
+    /* 2. Boundary: stops it from getting too wide on desktop */
+    max-width: 700px; 
+    /* 3. Responsive Padding: gets smaller on mobile */
+    padding: clamp(30px, 3vw, 70px) 30px;
+    margin: 10px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, rgba(35, 35, 35, 0.8) 0%, rgba(10, 10, 10, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 32px;
+}
+
+.testimonial-featured .student-avatar {
+    /* 4. Responsive Image: shrinks on mobile */
+    width: clamp(60px, 13vw, 90px) !important;
+    height: clamp(60px, 13vw, 90px) !important;
+    border-radius: 50% !important;
+    border: 3px solid var(--primary-neon);
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.testimonial-featured .student-name {
+    /* 5. Scaling Text: (Min size, dynamic rate, max size) */
+    font-size: clamp(1rem, 4vw, 1.6rem);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.testimonial-featured .student-occupation {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+}
+
+.testimonial-featured .review-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+}
+
+/* STANDARD TICKER CARDS (Image Left / Text Below) */
+.testimonial-standard {
+    width: 100%;            /* Take full width of the screen */
+    max-width: 420px;       /* But don't grow larger than 420px */
+    min-width: unset;       /* REMOVE the min-width that was forcing it to stay wide */
+    display: flex;
+    flex-direction: column; 
+    padding: 40px 30px;     /* Slightly smaller padding for mobile */
+    box-sizing: border-box;
+}
+
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.testimonial-standard .review-text {
+    font-size: 0.8;
+    font-weight: 300;
+}
+
+.testimonial-standard .student-avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.testimonial-standard .student-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.testimonial-standard .student-occupation {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* NEON RED STARS */
+.neon-stars {
+    color: var(--primary-neon);
+    font-size: 1.3rem;
+    text-shadow: 0 0 10px rgba(255, 0, 51, 0.4);
+    margin: 15px 0;
+}
+
+/* 9. MOBILE MENU */
+.nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 25px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-burger span {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-white);
+    transition: 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .nav-burger {
+        display: flex;
+        z-index: 1001;
+    }
+
+    .nav-burger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger.active span:nth-child(2) { opacity: 0; }
+    .nav-burger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        transition: 0.4s ease-in-out;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+        font-weight: 800; /* Heavier Montserrat for mobile */
+    }
+}
+
+/* --- Sales Copy & Transformation Sections --- */
+/* SHARED UTILITIES */
+.container-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.text-center { text-align: center; }
+.text-glow { text-shadow: 0 0 15px var(--primary-neon); }
+.text-neon { color: var(--primary-neon); }
+
+/* TRANSFORMATION CARDS */
+.transformation-section { 
+    padding: clamp(20px, 4vw, 50px) 30px;
+    margin-top: 50px;
+}
+
+.transformation-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 3vw, 40px); 
+    flex-wrap: wrap; 
+    width: 100%;
+}
+
+/* 1. Shared Card Logic (Matching the rest of your site) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03); 
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
+    position: relative;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+/* Typography Balance */
+.card-label {
+    display: block;
+    font-size: 0.85rem; /* Slightly larger for better balance */
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem; /* Tighter gap to the image */
+    color: var(--text-gray);
+}
+
+.label-neon {
+    color: var(--primary-neon);
+}
+
+/* The Stat "Badge" Logic */
+.growth-stats {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.stat-num {
+    font-size: 1.1rem; /* More natural size that doesn't overwhelm the label */
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 8px 16px;
+    border-radius: 100px; /* Makes it a pill */
+    display: inline-block;
+}
+
+/* Before Stat: Simple and clean */
+.before-card .stat-num {
+    color: var(--text-gray);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* After Stat: The "Glowing Red Background" effect */
+.after-card .stat-num {
+    color: #fff;
+    background: rgba(255, 0, 51, 0.15); /* Soft neon red tint */
+    border: 1px solid rgba(255, 0, 51, 0.4);
+    box-shadow: 0 0 20px rgba(255, 0, 51, 0.2); /* Interior glow */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* The After Card External Glow */
+.after-card {
+    border-color: rgba(255, 0, 51, 0.25);
+    /* Subtle ambient red glow behind the whole card */
+    box-shadow: 0 0 40px rgba(255, 0, 51, 0.08); 
+}
+
+/* Image Container Consistency */
+.img-container {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+.growth-img {
+    width: 100%;
+    border-radius: 8px;
+    opacity: 0.9;
+}
+
+.after-card .growth-img {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 51, 0.1));
+}
+
+.growth-arrow {
+    color: var(--primary-neon);
+    opacity: 0.6;
+    flex-shrink: 0;
+    transition: transform 0.3s ease; /* Smoothly animates the rotation */
+}
+
+@media (max-width: 768px) {
+    .large-caps { font-size: 1.8rem; }
+    .transformation-flex {
+        flex-direction: column; /* Stacks cards vertically under each other */
+    }
+    .growth-arrow {
+        transform: rotate(90deg); /* Points the arrow down for the vertical stack */
+        margin: 10px 0;
+    }
+    .glass-card {
+        padding: 12px;
+        border-radius: 12px;
+    }
+}
+
+/* --- AGITATION / PAIN POINTS --- */
+.agitation-section {
+    padding: clamp(48px, 8vw, 96px) 30px;
+}
+
+.section-title-sm {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--text-white);
+
+    /* ÚPRAVA MEZER: */
+    margin-top: 0; /* Rušíme mezeru nad, aby platila ta od šipky */
+    margin-bottom: clamp(32px, 5vw, 56px); /* Mezera pod nadpisem k obsahu */
+}
+
+/* THE GRID LOGIC */
+.pain-points-grid {
+    display: grid;
+    /* On mobile/tablet, it auto-fills. On desktop, we force 2 columns via media query below */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+/* THE CARDS (Consolidated .hyper-glass and .pain-card) */
+.pain-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth hover */
+}
+
+.pain-card:hover {
+    background: rgba(255, 0, 51, 0.03);
+    border-color: rgba(255, 0, 51, 0.2);
+    transform: translateY(-4px); /* Subtle lift effect */
+}
+
+/* ICON STYLING */
+.neon-icon-box {
+    width: 28px; /* Slightly larger for the bigger title */
+    height: 28px;
+    min-width: 28px;
+    border: 1px solid rgba(255, 0, 51, 0.5);
+    background: rgba(255, 0, 51, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.icon-x::before {
+    content: "✕";
+    color: var(--primary-neon);
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Hover State for inner elements */
+.pain-card:hover .neon-icon-box {
+    background: var(--primary-neon);
+    border-color: var(--primary-neon);
+}
+
+.pain-card:hover .icon-x::before { 
+    color: white; 
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 992px) {
+    .pain-points-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 fixed columns on large screens */
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* --- VISION SECTION --- */
+
+.container-narrow {
+    max-width: 700px; /* Slightly narrower to keep eye travel minimal */
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.vision-title {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+    text-align: center;
+    color: var(--text-white);
+
+    /* Sjednocení mezery od šipky */
+    margin-top: 0; 
+    margin-bottom: 40px;
+}
+
+/* Ujistíme se, že nadpis Vision nemá margin nahoře */
+.vision-section .vision-title {
+    margin-top: 0 !important;
+}
+
+.vision-copy {
+    text-wrap: balance; 
+    max-width: 40ch; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    line-height: 1.5;
+    font-weight: 400;
+    text-align: center;
+}
+
+.vision-copy p {
+    margin-bottom: 1.5rem;
+}
+
+/* Highlights & Accents */
+.text-white { color: #fff; }
+
+/* Accents - Dialed down */
+.bold-italic { 
+    font-style: italic; 
+    font-weight: 500;
+    font-size: 1.3rem; /* More subtle */
+    color: #fff;
+    margin: 1rem 0;
+    display: block;
+}
+
+.large-bold { 
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 1rem 0;
+    color: #fff;
+}
+
+.large-caps { 
+    /* Significantly smaller to avoid "screaming" */
+    font-size: 1.3rem; 
+    font-weight: 800; 
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin: 1rem 0;
+    color: var(--primary-neon);
+}
+
+/* The "Neon Slash" Divider */
+.divider-neon {
+    width: 40px;
+    height: 2px;
+    background: var(--primary-neon);
+    margin: 20px auto;
+    opacity: 0.4; /* Softer glow */
+}
+
+/* Making the glowing text actually pop */
+.text-neon {
+    color: var(--primary-neon);
+}
+
+.text-glow {
+    /* Very subtle glow so it doesn't vibrate on the screen */
+    text-shadow: 0 0 15px rgba(255, 0, 51, 0.3);
+}
+
+/* TICKER LOGIC */
+.ticker-viewport {
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+/* MOBILE FIRST: Static Column */
+.ticker-track {
+    display: flex;
+    flex-direction: column; /* Na mobilu pod sebou */
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+}
+
+/* DESKTOP (Ticker) */
+@media (min-width: 1024px) {
+    .ticker-viewport {
+        overflow: hidden;
+        /* Maska pro plynulé mizení do stran */
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .ticker-track {
+        flex-direction: row; /* Na desktopu vedle sebe */
+        width: max-content;
+        gap: 30px; /* Musí být stejný gap všude */
+        animation: ticker-rtl 70s linear infinite;
+        will-change: transform;
+    }
+
+    .ticker-track:hover {
+        animation-play-state: paused;
+    }
+
+    .testimonial-standard {
+        width: 420px;
+        min-width: 420px;
+        min-height: 370px;
+        flex-shrink: 0; /* Karta se nesmí smrštit */
+    }
+}
+
+/* KLÍČOVÝ BOD: Animace na -50% (polovina zdvojeného pásu) */
+@keyframes ticker-rtl {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+/* --- REVIEWS SECTION --- */
+.reviews-section {
+    /* Nastavení horního paddingu na 60px pro sjednocení s Vision sekcí */
+    padding: 60px 0 clamp(60px, 8vw, 100px) 0;
+    width: 100%;
+    overflow: hidden; /* Zabrání přetečení tickeru do stran */
+}
+
+.section-header-v2 {
+    margin-bottom: 10px;
+}
+
+/* This is the starting state: invisible and shifted down 20px */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); /* A "smooth" timing function */
+}
+
+/* This is the state the JS triggers when you scroll to the element */
+.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- OUTCOME SECTION - FIXED RESPONSIVITY --- */
+.outcome-section {
+    padding: 60px 20px clamp(60px, 8vw, 100px) 20px; /* Fixních 60px nahoře */
+    background: radial-gradient(circle at 100% 50%, rgba(255, 0, 51, 0.05) 0%, transparent 40%);
+}
+
+.outcome-grid {
+    display: grid;
+    /* DEFAULT: 1 sloupec (pro mobil i tablet) */
+    grid-template-columns: 1fr; 
+    gap: 24px;
+    max-width: var(--max-width);
+    margin: 48px auto;
+    /* Zajistí centrování karet v mřížce, když jsou pod sebou */
+    justify-items: center; 
+}
+
+.outcome-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 30px; 
+    text-align: left;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 1px solid rgba(255, 0, 51, 0.3);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px; /* Sjednoceno s .pain-card */
+
+    /* KLÍČOVÉ NASTAVENÍ ŠÍŘKY: Adaptace podle testimonial-standard */
+    width: 100%;
+    max-width: 420px; /* Stejná šířka jako tvé recenze v tickeru */
+}
+
+.outcome-card:hover {
+    transform: translateY(-8px);
+    border-top-color: var(--primary-neon);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 0, 51, 0.1);
+}
+
+/* DESKTOP MÓD: Přepnutí na 3 sloupce naráz */
+@media (min-width: 1024px) {
+    .outcome-grid {
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: stretch; /* Na desktopu vyplní celou šířku sloupce */
+    }
+    
+    .outcome-card {
+        max-width: none; /* Na desktopu se přizpůsobí šířce sloupce (1/3) */
+    }
+}
+
+.outcome-icon-box {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    background: rgba(255, 0, 51, 0.1);
+    border: 1px solid var(--primary-neon);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-neon);
+    box-shadow: 0 0 15px rgba(255, 0, 51, 0.3);
+    margin-top: 4px;
+}
+
+.outcome-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-white);
+    letter-spacing: -0.02em;
+}
+
+.outcome-content p {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+}
+
+/* SMART MOBILE ADJUSTMENTS */
+@media (max-width: 600px) {
+    .outcome-card {
+        flex-direction: column;
+        align-items: center; 
+        text-align: center;
+        /* Padding přizpůsobený pro úzké mobily */
+        padding: 30px 20px; 
+    }
+    
+    .outcome-icon-box {
+        margin-bottom: 5px;
+        margin-top: 0;
+    }
+}
+
+/* --- REVEAL & STATS --- */
+
+.intro-label {
+    font-size: clamp(1rem, 2vw, 1.2rem); /* Větší než běžný text, menší než nadpis */
+    font-weight: 500;
+    letter-spacing: 0.3em; /* Vzdušnější pro prémiový vzhled */
+    color: var(--primary-neon); /* Neonová barva pro "Introducing" */
+    text-transform: uppercase;
+    opacity: 0.9;
+
+    /* Zajištění, že se to nalepí pod šipku */
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: block; /* Pro jistotu */
+}
+
+.reveal-section .intro-label {
+    margin-top: 0 !important;
+}
+
+.offer-title {
+    font-size: clamp(2.2rem, 6vw, 3.8rem); /* Přesně mezi H1 a H2 */
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text-white);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.reveal-copy {
+    max-width: 750px;
+    margin: 0 auto 50px;
+}
+
+/* Zajištění, aby silný text v copy vynikl */
+.reveal-copy strong {
+    color: var(--text-white);
+    font-weight: 700;
+}
+
+/* --- AUTHORITY STATS BAR (PRECISE STYLE) --- */
+.stats-minimal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1300px; /* Užší pro lepší hustotu informací */
+    margin: 50px auto;
+    padding: 20px 0;
+}
+
+.stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.stat-number {
+    /* Zmenšeno a zjemněno */
+    font-size: clamp(1.8rem, 3vw, 2rem); 
+    font-weight: 700; /* Méně tlusté */
+    color: var(--text-white);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.05em; /* Čísla jsou více u sebe (clean look) */
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    font-weight: 400;
+    opacity: 0.6; /* Decentnější šedá */
+    letter-spacing: 0.01em;
+}
+
+/* TENKÉ ŠEDÉ SEPARÁTORY */
+.stat-divider {
+    width: 1px;
+    height: 50px; /* Kratší linka pro elegantní vzhled */
+    background: rgba(255, 255, 255, 0.15); /* Jemná šedá */
+    flex-shrink: 0;
+}
+
+/* RESPONZIVITA */
+@media (max-width: 768px) {
+    .stats-minimal-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .stat-divider {
+        width: 40px; /* Horizontální linka na mobilu */
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+}
+
+/* --- LONG VERTICAL SECTION DIVIDER --- */
+.section-divider-wrap {
+display: flex;
+flex-direction: column;
+align-items: center;
+/* První číslo (80px) je mezera NAD linkou */
+/* Druhé číslo (0) je mezera po stranách */
+/* Třetí číslo (20px) je mezera POD šipkou – tuhle hodnotu snižuj/zvyš dle potřeby */
+margin-top: 80px; 
+margin-bottom: 0px; 
+pointer-events: none;
+position: relative;
+z-index: 2; /* Aby byla šipka nad pozadím */
+}
+
+.divider-line {
+    width: 1px;
+    height: 160px; /* Prodlouženo pro dramatický efekt */
+    /* Gradient: Začíná velmi jemně, graduje do syté šedé a končí tvou neonovou červenou */
+    background: linear-gradient(to bottom, 
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 20%, 
+        rgba(255, 255, 255, 0.2) 60%,
+        var(--primary-neon) 100%
+    );
+}
+
+.divider-arrow {
+    margin-top: -2px;
+    filter: drop-shadow(0 0 12px rgba(255, 0, 51, 0.6)); /* Silnější záře pro delší linku */
+}
+
+.divider-arrow svg {
+    /* Mírně zvětšíme šipku, aby seděla k delší lince */
+    width: 34px;
+    height: 20px;
+}
+
+/* Responzivní úprava - na mobilu ji necháme mírně kratší, aby nezabírala celou obrazovku */
+@media (max-width: 768px) {
+    .section-divider-wrap {
+        margin: 50px 0;
+    }
+    .divider-line {
+        height: 100px;
+    }
+}
+
+/* --- MODULES STACK --- */
+.modules-stack {
+    width: 100%;
+    max-width: var(--max-width); /* 1100px */
+    margin: 40px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.luxury-module {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+    /* Klíč pro šířku: Hodně místa do stran, akorát nahoře/dole */
+    padding: 50px 70px; 
+    
+    text-align: left;
+    gap: 50px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 0, 51, 0.35); /* Neonová linka nahoře */
+    background: linear-gradient(155deg, rgba(18, 18, 18, 0.98) 0%, rgba(5, 5, 5, 1) 100%);
+    
+    /* Zajištění plné šířky kontejneru */
+    width: 100%;
+    max-width: none !important; 
+    min-height: auto;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 1. Základ (Mobil) - necháme to tak, jak to je, nebo jen malinkou korekci */
+.modules-header {
+    /* Na mobilu se spoléháme na mezeru od šipky, případně přidáme kousek */
+    margin-top: 10px !important; 
+}
+
+/* 2. Desktop (Notebooky a větší monitory) */
+@media (min-width: 1024px) {
+    .modules-header {
+        /* Tady to "odlepíme" od šipky, aby to dýchalo */
+        margin-top: 60px !important; 
+    }
+}
+
+.luxury-module:hover {
+    transform: translateY(-8px);
+    border-top-color: var(--primary-neon);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 0, 51, 0.1);
+}
+
+.module-content-side {
+    flex: 1;
+}
+
+/* RED GLOWING MODULE BADGE */
+.module-number-badge {
+    display: inline-block;
+    background: var(--primary-neon);
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 900;
+    padding: 5px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px rgba(255, 0, 51, 0.6); 
+}
+
+.module-title-luxury {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem); /* Masivní nadpis */
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.module-desc-luxury {
+    font-size: 1.05rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 520px;
+    text-wrap: balance;
+}
+
+/* LUXURY LIST - SINGLE COLUMN */
+.luxury-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.luxury-list li {
+    font-size: 1rem;
+    color: var(--text-gray);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 500;
+}
+
+/* RED STARBURST CHECK ICON (Custom SVG) */
+.luxury-list li::before {
+    content: "";
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    /* SVG pečeť/starburst v barvě tvého brandu */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF0033'%3E%3Cpath d='M12 1L14.4 5.3L19.3 4.3L18.3 9.2L22.6 11.6L18.3 14L19.3 18.9L14.4 17.9L12 22.2L9.6 17.9L4.7 18.9L5.7 14L1.4 11.6L5.7 9.2L4.7 4.3L9.6 5.3L12 1Z'/%3E%3Cpath d='M9 12L11 14L15 10' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* PRAVÁ STRANA - IKONA */
+.luxury-icon-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Ikona se nikdy nezmáčkne */
+}
+
+/* Glow za ikonou */
+.luxury-icon-glow {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background: var(--primary-neon);
+    filter: blur(50px);
+    opacity: 0.25;
+    z-index: 0;
+}
+
+/* Box pro ikonu */
+.luxury-icon-container::after {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(5, 5, 5, 1) 100%);
+    border-radius: 35px;
+
+    /* PŘIDÁNÍ NEON BORDERU */
+    border: 1px solid var(--primary-neon); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 0, 51, 0.2); 
+
+    z-index: 1;
+}
+
+.module-img-asset-luxury {
+    position: relative;
+    z-index: 2;
+    width: 115px; /* Velikost ikony */
+    height: auto;
+}
+
+/* RESPONZIVITA - MOBIL */
+@media (max-width: 900px) {
+    .luxury-module {
+        flex-direction: column-reverse; /* Ikona nahoře, text dole */
+        padding: 30px;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .module-desc-luxury {
+        max-width: 100%;
+        margin-inline: auto;
+    }
+
+    .luxury-list {
+        align-items: flex-start;
+        max-width: fit-content;
+        margin: 0 auto;
+    }
+}
+
+/* --- BONUSES SPECIFIC --- */
+.bonuses-section {
+    padding-bottom: 0;
+}
+
+/* Tlačítko pro Tutoriál (Bonus 01) */
+.btn-tutorial {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-tutorial:hover {
+    background: rgba(255, 0, 51, 0.1);
+    border-color: var(--primary-neon);
+    transform: translateX(5px);
+}
+
+.play-icon {
+    color: var(--primary-neon);
+    font-size: 0.8rem;
+}
+
+/* Úprava barvy badge pro bonusy (volitelné - pokud chceš, aby vypadaly trošku jinak než moduly) */
+#bonuses .module-number-badge {
+    background: linear-gradient(90deg, #FF0033, #80001A); /* Lehce tmavší červená pro odlišení */
+}
+
+/* Zarovnání listu v bonusech na mobilu (aby nebyl na střed, pokud je moc dlouhý) */
+@media (max-width: 900px) {
+    #bonuses .luxury-list {
+        text-align: left;
+    }
+}
+
+/* --- VALUE TAGS (V kartách) --- */
+.card-value-tag {
+    display: inline-block;
+    margin-top: 25px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+/* Hand-drawn underline efekt */
+.card-value-tag::after, .value-highlight::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10' preserveAspectRatio='none'%3E%3Cpath d='M0,5 C50,0 150,10 200,5' stroke='%23FF0033' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 5px rgba(255, 0, 51, 0.5));
+}
+
+/* --- TOTAL VALUE SECTION --- */
+.final-call-section {
+    padding: 0 0 10px 0;
+    margin-top: 60px;
+}
+
+.final-call-section .offer-title {
+    margin-top: 0;
+    margin-top: 50px;
+}
+
+/* --- PRICING CARD LUXURY --- */
+.pricing-section {
+    padding-bottom: 120px;
+}
+
+.pricing-card-luxury {
+    max-width: 500px;
+    margin: 0 auto;
+    background: linear-gradient(155deg, rgba(20, 20, 20, 0.95) 0%, rgba(5, 5, 5, 1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 2px solid var(--primary-neon);
+    border-radius: 32px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 0, 51, 0.1);
+}
+
+.pricing-badge {
+    background: rgba(255, 0, 51, 0.1);
+    color: var(--primary-neon);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.price-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* Jemná mezera mezi hodnotami */
+    margin: 20px 0 35px;
+}
+
+.price-display .currency {
+    font-size: 2.5rem;
+    vertical-align: top;
+    margin-right: 5px;
+    color: var(--primary-neon);
+}
+
+.price-subtitle {
+    color: var(--primary-dark);
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.pricing-features {
+    display: inline-flex;    /* Důležité: Blok se smrští podle nejdelšího řádku */
+    flex-direction: column;  /* Položky zůstanou pod sebou */
+    align-items: flex-start; /* Zarovná ikony a text vlevo pod sebe */
+    text-align: left;        /* Jistota pro zarovnání textu */
+    margin: 0 auto 40px;     /* Vycentruje celý tento blok v pricing kartě */
+    gap: 12px !important;
+    padding: 0;
+    list-style: none;        /* Odstraní případné defaultní tečky */
+}
+
+.pricing-features li {
+    font-size: 0.95rem;
+}
+
+.secure-checkout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    opacity: 0.7;
+}
+
+/* --- CENA: ČISTÝ A JEDNOTNÝ STYL --- */
+.price-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0; /* Těsnější sepětí */
+}
+
+.main-price {
+    /* Zmenšeno z 6rem na 4.5rem pro lepší balanc */
+    font-size: clamp(3.5rem, 10vw, 4.5rem); 
+    font-weight: 700; /* Mírně zjemněno z 800 */
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: baseline;
+}
+
+/* Sjednocení dolaru s číslem */
+.price-display .currency {
+    font-size: 0.9em; /* Přebírá přesnou velikost od .main-price */
+    color: #fff;
+    font-weight: 800; /* Stejná tloušťka */
+    margin-right: 4px; /* Malá mezera mezi $ a 29 */
+}
+
+/* --- VODOROVNÉ PŘEŠKRTNUTÍ --- */
+.original-value-strike {
+    font-size: 1.4rem; /* Lehce zmenšeno pro kontrast */
+    color: var(--text-gray);
+    font-weight: 500;
+    position: relative;
+    opacity: 0.6;
+    /* PŘIDÁNO: Větší mezery mezi čísly */
+    letter-spacing: 0.05em; 
+    text-transform: uppercase;
+}
+
+.original-value-strike::after {
+    content: "";
+    position: absolute;
+    left: -2%;
+    top: 55%; /* Umístění linky přesně doprostřed textu */
+    width: 104%;
+    height: 3px;
+    background-color: var(--primary-neon);
+    transform: rotate(0deg); /* Změněno na vodorovné */
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(255, 0, 51, 0.3);
+}
+
+.value-strikethrough-container {
+    margin-bottom: 5px;
+}
+
+/* --- FAQ SECTION --- */
+.faq-section {
+    padding: 20px 0 100px 0; /* První číslo (20px) je mezera nahoře, druhé (0) boky, třetí (100px) spodek */
+}
+
+.faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Vynutí vycentrování všech dceřiných elementů (faq-item) na střed */
+    align-items: center; 
+    width: 100%;
+}
+
+.faq-item {
+    padding: 0 !important;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    
+    /* PŘEPSÁNÍ GLOBÁLNÍHO LIMITU: */
+    width: 100%; 
+    max-width: 750px; /* FAQ bude širší než běžná karta, aby vypadalo lépe */
+    margin: 0 auto;   /* Pojistka pro vycentrování */
+}
+
+.faq-item:hover {
+    border-color: rgba(255, 0, 51, 0.3);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 25px 30px;
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.faq-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ikona "PLUS" pomocí pseudoprvků */
+.faq-icon::before, .faq-icon::after {
+    content: "";
+    position: absolute;
+    background-color: var(--primary-neon);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 2px;
+}
+
+.faq-icon::before { width: 100%; height: 2px; } /* Horizontální čára */
+.faq-icon::after { width: 2px; height: 100%; }  /* Vertikální čára */
+
+/* Aktivní stav - Rotace a skrytí vertikální čáry pro efekt MÍNUS */
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+.faq-item.active .faq-icon::after {
+    opacity: 0;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+    padding: 0 30px;
+    text-align: left;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px; /* Dostatečná rezerva pro text */
+    padding-bottom: 25px;
+}
+
+.faq-answer p {
+    color: var(--text-gray);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* --- SITE FOOTER --- */
+.site-footer {
+    padding: 80px 0 40px; /* Horní padding pro prostor, spodní pro zakončení */
+    background-color: var(--bg-dark);
+}
+
+.footer-line {
+    width: 100%;
+    height: 1px;
+    /* Velmi jemný gradient od středu do ztracena */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.05) 50%, 
+        transparent 100%
+    );
+    margin-bottom: 30px;
+}
+
+.footer-copy {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    opacity: 0.5; /* Decentní vzhled */
+    letter-spacing: 0.05em;
+    font-weight: 400;
+}
+
+/* Jemný hover efekt na textu pro interaktivitu */
+.footer-copy:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
